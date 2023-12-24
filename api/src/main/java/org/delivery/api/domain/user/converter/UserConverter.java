@@ -14,11 +14,14 @@ import java.util.Optional;
 @Converter
 public class UserConverter {
 
+	/**
+	 * UserRegisterRequest -> Entity 변환 메서드
+	 */
 	public UserEntity toEntity(UserRegisterRequest request) {
 
 		return Optional.ofNullable(request)
 				.map(it -> {
-					// to Entity
+					// to entity
 
 					return UserEntity.builder()
 							.name(request.getName())
@@ -30,6 +33,9 @@ public class UserConverter {
 				.orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT, "UserRegisterRequest Null"));
 	}
 
+	/**
+	 * userEntity -> response 변환 메서드
+	 */
 	public UserResponse toResponse(UserEntity userEntity) {
 
 		return Optional.ofNullable(userEntity)
@@ -46,6 +52,6 @@ public class UserConverter {
 							.lastLoginAt(userEntity.getLastLoginAt())
 							.build();
 				})
-				.orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT, "User Entity Null"));
+				.orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT, "UserEntity Null"));
 	}
 }

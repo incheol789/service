@@ -20,7 +20,7 @@ public class UserApiController {
 	@GetMapping("/me")
 	public Api<UserResponse> me(@UserSession User user) {
 
-		var response = userBusiness.me(user.getId());
+		var response = userBusiness.me(user);
 		return Api.OK(response);
 	}
 }
